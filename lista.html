@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <style>
+
+        :root {
+            --color-primario: green;
+            --color-secundario: #b09cff;
+            --color-fondo: #e4e3e6;
+            --espacio-base: 1rem;
+            --font-size: 1rem;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--color-primario);
+            padding: var(--espacio-base);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            color: #f0f0f0;
+            display: flex;
+        }
+
+        .navbar__list {
+            display: flex;
+            list-style: none;
+            margin: auto;
+            padding: 0;
+            flex-wrap: wrap;
+
+        }
+
+        .navbar__item {
+            margin: 0 calc(var(--espacio-base) / 2);
+            font-size: var(--font-size);
+        }
+
+        .navbar__link {
+            color: #f0f0f0;
+            text-decoration: none;
+
+        }
+
+        .contenedor {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--espacio-base);
+            padding: var(--espacio-base);
+        }
+
+        .tarjeta {
+            position: relative;
+            padding: var(--espacio-base);
+            background-color: var(--color-fondo);
+            border: 1px solid var(--color-secundario);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .boton {
+            position: relative;
+            bottom: -18%;
+            right: 0%;
+            background-color: var(--color-primario);
+            color: white;
+            padding: 0.5rem;
+            font-size: var(--font-size);
+            border: none;
+            cursor: pointer;
+        }
+
+  
+
+        @media (max-width: 768px) {
+            .contenedor {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            
+        }
+
+        @media (max-width: 600px) {
+            .navbar__list {
+                flex-direction: column;
+                align-items: center;
+            }
+            .navbar__item {
+                margin: 0 calc(var(--espacio-base) / 2) 0;
+            }
+        }
+
+        .contenedor {
+            margin-top: 60px;
+            padding: var(--espacio-base);
+        }
+
+        .contenedor__titulo {
+            font-size: 1.5rem;
+            margin-bottom: var(--espacio-base);
+        }
+
+        .contenedor__texto {
+            font-size: 1rem;
+            margin-bottom: var(--espacio-base);
+        }
+
+        .contenedor__boton {
+            background-color: var(--color-primario);
+            color: white;
+            padding: 0.5rem;
+            font-size: var(--font-size);
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .contenedor__boton--secundario {
+            background-color: var(--color-secundario);
+            color: black;
+        }
+   
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul class="navbar__list">
+            <li class="navbar__item"><a href="index.html" class="navbar__link" target="_blank">Blanck</a></li>
+            <li class="navbar__item"><a href="index.html" class="navbar__link"  target="_self">Self</a></li>
+            <li class="navbar__item"><a href="index.html" class="navbar__link"  target="_parent">Parent</a></li>
+            <li class="navbar__item"><a href="index.html" class="navbar__link"  target="_top">Top</a></li>
+        </ul>
+    </nav>
+    <div class="contenedor">
+        <div class="tarjeta">
+            <h2 class="titulo">Producto 1</h2>
+            <p class="descripcion">Descripción del producto 1</p>
+            <button class="boton">Añadir al carrito</button>
+        </div>
+        <div class="tarjeta">
+            <h2 class="titulo">Producto 2</h2>
+            <p class="descripcion">Descripción del producto 2</p>
+            <button class="boton">Añadir al carrito</button>
+        </div>
+        <div class="tarjeta">
+            <h2 class="titulo">Producto 3</h2>
+            <p class="descripcion">Descripción del producto 3</p>
+            <button class="boton">Añadir al carrito</button>
+        </div>
+
+
+    </div>
+
+
+    <!-- <div class="contenedor">
+        <h1 class="contenedor__titulo">Título del Contenedor</h1>
+        <p class="contenedor__texto">Este es un contenedor que agrupa varios elementos.</p>
+        <button class="contenedor__boton">Botón del Contenedor</button>
+        <button class="contenedor__boton contenedor__boton--secundario">Botón del Contenedor</button>
+        
+    </div> -->
+    <!-- 
+    PARA UN BLOQUE
+    CONTENDOR, SECCION, ARTÍCULO, ASIDE, NAV, HEADER, FOOTER
+
+    para un elemento
+    nombreBloque__nombreElemento -> contenedor__table-productos
+
+    modificador (Adicional al nombre del elemento)
+
+    nombreBloque__nombreElemento--modificador
+
+
+
+
+    -->
+
+</body>
+</html>

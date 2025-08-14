@@ -1,0 +1,61 @@
+
+
+html {
+    font-size: 20px;
+}
+
+.tarjeta {
+    width: 80%;
+  max-width: 200px;
+  margin: 2rem auto;
+  padding: 1.5em;
+  background-color: #f0f0f0;
+  border: 3px double black;
+}
+.tarjeta-titulo {
+    font-size: 3rem;
+}
+.tarjeta-contenido {
+    font-size: 1rem;
+  color: green;
+
+}
+.tarjeta-boton {
+    width: 50px;
+    padding: 0.3rem;
+    background-color: #0d4f1e;
+    color: white;
+}
+
+.tarjeta-boton:hover {
+    width: 70%;
+    padding: 0.5rem;
+    background-color: #b6d3ed;
+    color: rgb(0, 0, 0);
+}
+
+
+.tarjeta-boton:visited {
+    color: rgb(234, 1, 1);
+}
+
+
+@media (max-width: 600px) {
+
+
+    html {
+        font-size: 10px;
+    }
+
+    .tarjeta-titulo {
+        width: 90vw;
+    }
+
+    .tarjeta-boton {
+        font-size: 3rem;
+        width: 30px;
+    }
+
+
+
+}

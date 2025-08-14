@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display</title>
+    <style>
+
+        .contenedor {
+                display: grid;
+                padding: 20px;
+                grid-template-columns: repeat(3, 25%);
+                grid-template-rows: repeat(1, 50%);
+                gap: 1%;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+        }
+
+        .tarjeta {
+            background-color: antiquewhite;
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: none;
+            
+        }
+
+        @media (min-width:270px) and (max-width: 656px) {
+            .contenedor {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .tarjeta {
+                display: flex;
+            }
+        }
+
+        /* @media (min-width: 256px) {
+            .contenedor {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .tarjeta {
+                display: none;
+            }
+        } */
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="tarjeta"> 
+            
+            <p>Tarteta 1</p>
+
+            <p>Tarteta 1</p>
+
+
+            <p>Tarteta 1</p>
+
+
+            <p>Tarteta 1</p>
+
+        </div>
+        <div class="tarjeta"> Tarteta 2  Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta </div>
+        <div class="tarjeta"> Tarteta 3  Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1</div>
+        <div class="tarjeta"> Tarteta 4  Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1</div>
+        <div class="tarjeta"> Tarteta 5  Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1  </div>
+        <div class="tarjeta"> Tarteta 6  Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1 Tarteta 1</div>
+
+    </div>
+</body>
+</html>

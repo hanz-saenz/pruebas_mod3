@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <style>
+        .relativo {
+            position: relative;
+            top: 109px;
+            left: 76px;
+            background-color: royalblue;
+            bottom: -54px;
+            padding: 141px;
+            right: 111px;
+        }
+        .absoluto {
+            position: absolute;
+            top: 109px;
+            left: 76px;
+            background-color: rgb(8, 73, 18);
+            bottom: -54px;
+            padding: 141px;
+            right: 111px;
+        }
+        .fixed {
+            position: fixed;
+            top: 2px;
+            left: 5px;
+            background-color: rgb(105, 41, 11);
+            padding: 2px;
+            right: 5px;
+            z-index: 1000;
+            color: wheat;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed">
+        <ul>
+            <li>Elemento 1</li>
+            <li>Elemento 2</li>
+            <li>Elemento 3</li>
+        </ul>
+    </div>
+    <div class="relativo">Elemento Relativo</div>
+    <div class="absoluto">Elemento Absoluto</div>
+</body>
+</html>
