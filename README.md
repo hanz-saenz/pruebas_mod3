@@ -24,6 +24,9 @@ Este archivo. Contiene la descripción general del proyecto y los contenidos del
 ### 📄 index.html
 Página principal del proyecto. Suele actuar como punto de entrada al sitio web o resumen de los demás ejercicios.
 
+### 📄 contacto.html
+Página con los datos para contactarnos.
+
 ### 📄 display.html
 Archivo que explora las diferentes propiedades de `display` en CSS, como `block`, `inline`, `inline-block`, `none`, entre otras.
 
