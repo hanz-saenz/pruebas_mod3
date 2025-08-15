@@ -54,8 +54,14 @@ El objetivo de este repositorio es servir como un recurso de aprendizaje para es
 
 Solo necesitas un navegador web moderno para visualizar los archivos. También puedes clonarlo localmente con:
 
+Clona el reposrio
 ```bash
 git clonehttps://github.com/tu-usuario/nombre-del-repositorio.git
 ```
 
+Clona el REPOSITORIO
+```bash
+git clonehttps://github.com/tu-usuario/nombre-del-repositorio.git
+```
 
+Ejecuta el archivo index.html
