@@ -1,5 +1,5 @@
 # Pruebas del módulo 3 Enyoi
-Pruebas de html y css para el modulo 3
+Pruebas de html y css para el modulo 3 - aprendiendo a crear pagina web responsive
 
 ## Contenido:
 - Páginas html
