@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compra</title>
+</head>
+<body>
+    <h1>Carrito de compras</h1>
+
+    <div>
+        <label>Ingrese el nombre del producto</label>
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <label>Ingrese el valor</label>
+        <input type="number" id="valorProducto" placeholder="Valor">
+        <button id="agregarProducto">Agregar producto</button>
+    </div>
+    <ul id="listCarrito"></ul>
+    <div id="total">Total: $0</div>
+  
+   
+    <script>
+
+        let producto = document.getElementById('nombreProducto');
+        let valor = document.getElementById('valorProducto');
+        let boton = document.getElementById('agregarProducto');
+        let lista = document.getElementById('listCarrito');
+        let total = document.getElementById('total');
+
+        // vamos a alamacenar nuestros productos
+        let carrito = [];
+
+        //funcion para calcular el total 
+        function calcularTotal(){
+            let totalReduce = carrito.reduce((sum, item) => sum + item.precioProducto, 0);
+            total.innerText = `Total: $${totalReduce.toFixed(2)}`;
+        }
+
+        function mostrarCarrito() {
+            lista.innerText = '';
+            carrito.forEach((item, index) => {
+                let li = document.createElement('li');
+                li.innerHTML = `${item.nombreProduycto}: $${item.precioProducto.toFixed(2)}
+                <button class="eliminar" data-index="${index}">Eliminar</button>
+                `;
+                lista.appendChild(li);
+            });
+            calcularTotal();
+        };
+
+        // agregar productos con el boton
+
+        boton.addEventListener('click', function(){
+            let nombreProduycto = producto.value.trim();
+            let precioProducto = parseFloat(valor.value);
+
+            if (nombreProduycto === '') {
+                alert('Ingrese el nombre del producto');
+                return;
+            }
+
+            if (isNaN(precioProducto) || precioProducto <= 0) {
+                alert('Ingrese un precio válido');
+                return;
+            }
+
+            carrito.push({ nombreProduycto, precioProducto });
+            producto.value = '';
+            valor.value = '';
+            mostrarCarrito();
+        })
+
+        // eliminar productos
+        lista.addEventListener('click', function(event) {
+            if (event.target.classList.contains('eliminar')) {
+                let index = event.target.getAttribute('data-index');
+                carrito.splice(index, 1);
+                mostrarCarrito();
+            }
+        });
+
+
+    </script>
+</body>
+</html>

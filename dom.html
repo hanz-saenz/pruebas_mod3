@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <div>
+        <h1 id="titulo">Javascript!</h1>
+    </div>
+    <ul id="lista">
+        <!-- aqui veremos los elementos -->
+         
+    </ul>
+    <input type="text" id="textoInput" placeholder="Nuevo Elemento">
+    <button id="agregarElemento">Agregar Elemento</button>
+    <hr>
+    <ul id="listaSeleccionar">
+        <!-- aqui veremos los elementos -->
+         
+    </ul>
+    <select id="seleccionarElementos">
+        <option value="">Seleccionar Elemento</option>
+        <option value="elemento1">Elemento 1</option>
+        <option value="elemento2">Elemento 2</option>
+        <option value="elemento3">Elemento 3</option>
+    </select>
+   
+    <script>
+        let titulo = document.getElementById('titulo');
+        console.log('El titulo es', titulo.innerText)
+        titulo.innerText = 'Hola Javascript';
+        titulo.style.backgroundColor = 'red';
+        // titulo.style.display = 'none';
+        //seleccionar la lista y el boton
+        let lista = document.getElementById('lista');
+        let boton = document.getElementById('agregarElemento');
+        let textoInput = document.getElementById('textoInput');
+        // agregar elemento a la lista
+        boton.addEventListener('click', function() {
+            // validar que el campo no esté vacío
+            if (textoInput.value.trim() === '') {
+                alert('Por favor ingresa un elemento');
+                return;
+            }
+            
+            // crear un nuevo elemento li
+            let nuevoElemento = document.createElement('li');
+            nuevoElemento.innerText = textoInput.value;
+            nuevoElemento.style.color = 'blue';
+            nuevoElemento.style.fontWeight = 'bold';
+            nuevoElemento.style.textDecoration = 'underline';
+            //crear el boton eliminar
+            let botonEliminar = document.createElement('button');
+            botonEliminar.innerText = 'Eliminar';
+            botonEliminar.style.marginLeft = '10px';
+            botonEliminar.addEventListener('click', function() {
+                lista.removeChild(nuevoElemento);
+            });
+            nuevoElemento.appendChild(botonEliminar);
+            lista.appendChild(nuevoElemento);
+            
+            // limpiar el input
+            textoInput.value = '';
+        })
+        
+        // evento change
+        let listSeleccionar = document.getElementById('listaSeleccionar')
+        let elementoSeleccionado = document.getElementById('seleccionarElementos')
+        elementoSeleccionado.addEventListener('change', function() {
+            // validar que se haya seleccionado algo
+            if (this.value === '') {
+                return;
+            }
+            
+            // obtener solo el texto de los elementos (sin incluir el botón)
+            let elementoExistente = Array.from(listSeleccionar.getElementsByTagName('li')).map(
+                li => {
+                    // obtener solo el primer nodo de texto, excluyendo el botón
+                    return li.firstChild ? li.firstChild.textContent.trim() : '';
+                }
+            );
+            
+            if (elementoExistente.includes(this.value)) {
+                alert('El elemento ya existe en la lista');
+                this.value = '';
+                return;
+            }
+            
+            let nuevoElemento = document.createElement('li');
+            nuevoElemento.innerText = elementoSeleccionado.value;
+           
+            let botonEliminar = document.createElement('button');
+            botonEliminar.innerText = 'Eliminar';
+            botonEliminar.style.marginLeft = '10px';
+            botonEliminar.addEventListener('click', function() {
+                listSeleccionar.removeChild(nuevoElemento);
+            });
+            nuevoElemento.appendChild(botonEliminar);
+            listSeleccionar.appendChild(nuevoElemento);
+            this.value = '';
+        })
+    </script>
+</body>
+</html>

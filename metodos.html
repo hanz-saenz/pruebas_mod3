@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+</head>
+<body>
+    <div class="titulo">
+        <h1>Javascript!</h1>
+    </div>
+
+    <script>
+           
+        //    Metodos String
+        let texto = " Hola, bienvenidos ";
+        let complemento = 'a Javascript'
+        console.log(texto.length); // longitud del texto
+        console.log(texto.toUpperCase()); // texto en mayúsculas
+        console.log(texto.toLowerCase()); // texto en minúsculas
+        console.log(texto.charAt(0)); // primer carácter
+        console.log(texto.charAt(16)); // último carácter
+        console.log(texto.indexOf('bienvenidos')); // posición de la palabra
+        console.log(texto.indexOf('H')); // posición de la palabra
+
+        console.log(texto.concat(' ', complemento, ' a')); // concatenar texto
+        console.log(texto.trim()); // eliminar espacios al inicio y final
+
+
+
+        let contenido = ' Este es el contenido de mi texto para las pruebas de metodos String';
+        let tamano = contenido.length;
+        let mayusculas = contenido.toUpperCase();
+        let minusculas = contenido.toLowerCase();
+        let caracter_16 = contenido.charAt(16);
+        let caracter_32 = contenido.charAt(32);
+        let buscarTexto = contenido.indexOf('texto');
+        let trimContenido = contenido.trim();
+
+        let complementoContenido = 'en Javascript';
+
+        let resultado = trimContenido.concat(
+            ' ', complementoContenido, ' el tamaño es de ', tamano, 
+            ' caracteres. En mayúsculas: ', mayusculas, ' En minúsculas: ', minusculas,
+            ' Carácter 16: ', caracter_16, ' Carácter 32: ', caracter_32,
+            ' Buscar "texto": ', buscarTexto, ' Trim: ', trimContenido
+        );
+        console.log(resultado);
+
+
+        // metodos array
+
+        let colores = ['rojo', 'verde', 'azul', 'amarillo'];
+        console.log(colores); // mostrar el array
+        console.log(colores.length); // longitud del array
+        console.log(colores.push('rosado'));
+        console.log(colores);
+        colores.pop();
+        console.log(colores);
+        colores.shift();
+        console.log(colores); // mostrar el array
+        console.log(colores.unshift('morado'));
+        console.log(colores); // mostrar el array
+
+        colores.forEach(function(color) {
+            console.log(color);
+        })
+        console.log(typeof colores);
+        const colorJoin = colores.join(', ');
+        console.log(colorJoin);
+        console.log(typeof colorJoin);
+
+
+
+
+    let elementos = ['lapiz', 'borrador', 'cuaderno']
+    let tamanoArray = elementos.length;
+    let agregarElemento = elementos.push('regla');
+    let eliminarUltimoElemento = elementos.pop();
+    let eliminarPrimerElemento = elementos.shift();
+    let agregarElementoAlInicio = elementos.unshift('regla');
+
+    elementos.forEach(function(elemento) {
+        console.log(elemento);
+    });
+
+    let listaElemento = elementos.join(', ');
+
+    console.log('Elementos: ', elementos);
+    
+    console.log('Tamaño del Array: ', tamanoArray);
+    console.log('Agregar Elemento: ', agregarElemento);
+    console.log('Eliminar Último Elemento: ', eliminarUltimoElemento);
+    console.log('Eliminar Primer Elemento: ', eliminarPrimerElemento);
+    console.log('Agregar Elemento al Inicio: ', agregarElementoAlInicio);
+    console.log('Lista de Elementos: ', listaElemento);
+
+    </script>
+</body>
+</html>

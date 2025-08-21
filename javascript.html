@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+
+</head>
+<body>
+    <div class="titulo">
+        <h1>Javascript!</h1>
+    </div>
+
+    <script>
+
+        var saludo = "Hola";
+        let edad = 34;
+        const pais = "España";
+
+        console.log('saludo '+ saludo);
+        console.log(`saludo - ${saludo}`)
+        console.log('saludo '.concat(saludo))
+
+        // Numericos
+        let productos = 8;
+        let precio = 5.99;
+
+        console.log(productos)
+        console.log(precio)
+
+        // texto
+        let nombre = 'Hanz'
+        let direccion = "Cra 23 # 4-85"
+        let telefono = `+57 300 123 4567`
+        console.log(nombre);
+        console.log(direccion);
+        console.log(telefono);   
+
+        // Booleanos
+        let es_estudiante = true
+        let es_docente = false;
+        console.log(es_estudiante);
+        console.log(es_docente);
+
+        let apellido;
+        console.log(apellido); // undefined
+        let ciudad = null;
+        console.log(ciudad); // null
+
+        // compuestos
+
+        // objetos 
+
+        let persona = {
+            nombre: "Hanz",
+            edad: 34,
+            pais: "España",
+            es_docente: es_docente,
+        };
+
+        console.log(persona);
+        console.log(persona.nombre);
+        console.log(persona.edad);
+        console.log(persona.pais);
+        console.log(persona.es_docente);
+
+        //array
+        let fruta = ["manzana", "banana", "naranja", true,45 ];
+        console.log(fruta);
+        console.log(fruta.length)
+        console.log(fruta[0]);
+
+        console.log(typeof persona)
+
+        // operadores logicos
+
+        let primero = 2
+        let segundo = 4
+        console.log(typeof primero)
+        //suma
+        let suma = parseInt(primero) + segundo;
+        console.log(suma);
+
+        // resta
+        let resta = primero - segundo;
+        console.log(resta);
+
+        // multiplicación
+        let multiplicacion = primero * segundo;
+        console.log(multiplicacion);
+
+        // división
+        let division = primero / segundo;
+        console.log(division);
+
+        // modulo
+        let modulo = primero % segundo;
+        console.log(modulo);
+
+
+        //COMPARACIÓN
+
+        let a = 5;
+        let b = 10;
+        let c = 5;
+
+
+        // igualdad
+
+        let igual = a == c;
+        console.log(igual);
+        let igual_absoluta = a === b;
+        console.log(igual_absoluta);
+        let diferente = a !== b;
+        console.log(diferente);
+        let mayor = a > b;
+        let menor = a < b;
+        let mayor_igual = a >= c;
+        let menor_igual = a <= b;
+
+        console.log(mayor, 'false');
+        console.log(menor, 'true');
+        console.log(mayor_igual, 'true');
+        console.log(menor_igual, 'true');
+
+
+        if (a == b) {
+            console.log('a es igual a b');
+        } 
+        else  if ( c == a) {
+            console.log('c es igual a a');
+        }
+        
+        else {
+            console.log('a no es igual a c');
+        }
+
+        let d = 215; 
+        switch (d) {
+            case 5:
+                console.log('d es 5');
+                break;
+            case 10:
+                console.log('d es 10');
+                break;
+            default:
+                console.log('d no es 5 ni 10');
+        }
+
+        // funcion
+
+        function saludar() {
+            console.log('Hola, bienvenido!');
+        }
+
+        saludar();
+
+        function sumarValores(a, b) {
+            const suma = a + b;
+            return suma
+        }
+
+        let resultadoSuma = sumarValores(a, b);
+        console.log(`El resultado de la suma es: ${resultadoSuma}`);
+
+        function operador(a, b, operador) {
+            switch (operador) {
+                case '+':
+                    return a + b;
+                case '-':
+                    return a - b;
+                case '*':
+                    return a * b;
+                case '/':
+                    return a / b;
+                case '%':
+                    return a % b;
+                default:
+                    return 'Operador no válido';
+            }
+        }
+
+
+        let restaOperador = operador(4,2, '-');
+        console.log(`la resta de 4 y 2 es: ${restaOperador}`);
+
+
+        // operadores de asignación 
+        let valor = 5;
+        console.log(`El antiguo valor es: ${valor}`);
+        // +=
+        valor += 10;
+        console.log(`El nuevo valor sumado es: ${valor}`);
+
+        // -=
+        valor -= 1;
+        console.log(`El nuevo valor restado es: ${valor}`);
+
+        // for
+
+        // for (inicializador, condicion, incremento)
+
+        for (let i = 1; i < 50; i++) {
+            if (operador(i, 2, '%') === 0) {
+                console.log(`${i} es par`);
+            } else {
+                console.log(`${i} es impar`);
+            }
+            
+        }
+
+
+        // while
+
+        let contador = 0;
+        let restarvalor = 50;
+        while (contador <= 50) {
+            if (operador(contador, 2, '%') === 0) {
+                console.log(`${contador} while es par`);
+                console.log(`${restarvalor} while es par`);
+            } else {
+                console.log(`${contador} while es impar`);
+                console.log(`${restarvalor} while es impar`);
+            }
+            contador++;
+            restarvalor--;
+        }
+
+
+        // do - while
+        let contrasena;
+        let intentos = 2;
+        let contrasenaCorrecta = '1234';
+
+        do {
+            contrasena = prompt('Introduce la contraseña:');
+            intentos--;
+
+            if (contrasena !== contrasenaCorrecta) {
+                if (intentos > 0) {
+                    alert(`Contraseña incorrecta. Te quedan ${intentos} intentos.`);
+                } else {
+                    alert('Has agotado todos tus intentos.');
+                }
+            } else {
+                alert('Contraseña correcta. Acceso concedido.');
+            }
+        } while (contrasena !== contrasenaCorrecta && intentos > 0);
+        // Comprobar si la contraseña es correcta       
+
+        if (contrasena === contrasenaCorrecta) {
+            alert('Contraseña correcta. Acceso concedido.');
+        } 
+        else if (intentos === 0) {
+            alert('Has agotado todos tus intentos.');
+        }else {
+            alert('Acceso denegado. Has agotado tus intentos.');
+        }
+       
+    </script>
+</body>
+</html>
