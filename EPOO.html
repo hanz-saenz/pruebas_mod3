@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio POO</title>
+
+</head>
+<body>
+    <div class="titulo">
+        <h1>Ejercicio POO!</h1>
+    </div>
+
+    <script>
+        
+        class Producto {
+
+            #stock;
+            constructor(nombre, precio, categoria, stock) {
+                this.nombre = nombre;
+                this.precio = precio;
+                this.categoria = categoria;
+                this.#stock = stock;
+            }
+
+            //Encasulación
+
+            mostrarInformacionProducto() {
+                console.log("Nombre: " + this.nombre + " Precio: " + this.precio + " Categoría: " + this.categoria + " Stock: " + this.#stock);
+            }
+
+            obtenerStock() {
+                return this.#stock;
+            }
+
+            venta(cantidad) {
+                if (cantidad > this.#stock) {
+                    console.log("No hay suficiente stock para realizar la venta.");
+                } else {
+                    this.#stock -= cantidad;
+                    console.log(`Venta realizada de ${cantidad} unidades de ${this.nombre}. Stock restante: ${this.#stock}`);
+                }
+            } 
+
+        }
+
+
+
+        // Herencia
+
+        class Laptop extends Producto {
+            constructor(nombre, precio, stock, marca, memoria) {
+                super(nombre, precio, "Laptop", stock);
+                this.marca = marca;
+                this.memoria = memoria;
+            }
+
+            // polimorfismo
+            mostrarInformacionProducto() {
+                console.log(`${this.nombre} tiene ${this.memoria}GB de memoria RAM y cuesta ${this.precio}`);
+            }
+        }
+
+        class Celular extends Producto {
+            constructor(nombre, precio, stock, bateria) {
+                super(nombre, precio, "Celular", stock);
+                this.bateria = bateria;
+            }
+
+            // polimorfismo
+            mostrarInformacionProducto() {
+                console.log(`${this.nombre} tiene ${this.bateria}mAh de batería y cuesta ${this.precio}`);
+            }
+        }
+
+
+        class Carrito {
+            constructor() {
+                this.productos = [];
+            }
+            
+            //Abastraccion
+            agregarProducto(producto, cantidad) {
+                if (producto.obtenerStock() < cantidad) {
+                    console.log("No hay suficiente stock  de " + producto.nombre + " para agregar al carrito. Se agregaron " + cantidad + " unidades. y solo tenemos " + producto.obtenerStock());
+                } else {
+                    producto.venta(cantidad); // decontar del stock
+                    this.productos.push({ producto, cantidad });
+                    console.log(`Producto ${producto.nombre} agregado al carrito. CANTIDAD: ${cantidad}`);
+                }
+            }
+
+            calcularTotal() {
+                let total = 0
+                for (let producto of this.productos) {
+                    total += producto.producto.precio * producto.cantidad;
+                }
+                console.log(`Total a pagar: ${total}`);
+            }
+        }
+
+
+
+        //crear productos
+
+        let laptop = new Laptop("Laptop Gamer", 2, 5, "Asus", 16);
+        let celular = new Celular("Celular Samsung", 3, 10, 4000);
+        let producto = new Producto("Mouse Inalambrico", 4, "Accesorios", 20);
+
+        //mostrar información usando polimorfismo
+        laptop.mostrarInformacionProducto();
+        celular.mostrarInformacionProducto();
+        producto.mostrarInformacionProducto();
+
+        //carrito
+
+        let carrito = new Carrito();
+
+        carrito.agregarProducto(laptop, 2);
+        carrito.agregarProducto(celular, 1);
+        carrito.agregarProducto(producto, 3);
+
+        carrito.calcularTotal();
+
+    </script>
+</body>
+</html>

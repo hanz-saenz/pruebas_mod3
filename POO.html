@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO</title>
+
+</head>
+<body>
+    <div class="titulo">
+        <h1>POO!</h1>
+    </div>
+
+    <script>
+        
+        // CONSTRUIR EL OBJETO
+
+        // class Persona {
+
+        //     // metodod constructor = asignacion de atributos
+        //     constructor(nombre, edad){
+        //         this.nombre = nombre;
+        //         this.edad = edad;
+        //     }
+
+        //     // metodo mostrar informacion
+
+
+        //     mostrarInformacion() {
+        //         alert("Nombre: " + this.nombre + ", Edad: " + this.edad);
+        //     }
+        // }
+
+        // //Instancia
+
+        // let personaUno = new Persona("Juan", 30);
+        // personaUno.mostrarInformacion();
+        // let personaDos = new Persona("Maria", 25);
+        // personaDos.mostrarInformacion();
+
+
+
+        // class Carro {
+        //     constructor(marca, color) {
+        //         this.marca = marca;
+        //         this.color = color;
+        //     }
+
+        //     arrancar() {
+        //         console.log("El carro " + this.marca + " de color " + this.color + " ha arrancado.");
+        //     }
+
+        //     frenar() {
+        //         console.log("El carro " + this.marca + " de color " + this.color + " ha frenado.");
+        //     }
+        // } 
+
+
+        // let renault = new Carro('Renault', 'Negro')
+        // let toyota = new Carro('Toyota', 'Gris')
+
+        // renault.arrancar();
+        // toyota.frenar();
+        // renault.frenar();
+        // toyota.arrancar();
+
+
+        // class Producto {
+        //     constructor(nombre, precio) {
+        //         this.nombre = nombre;
+        //         this.precio = precio;
+        //     }
+
+        //     mostrarInformacion() {
+        //         console.log(this.nombre + " cuesta: " + this.precio);
+        //     }
+        // }
+
+
+        // class Carrito {
+        //     constructor() {
+        //         this.productos = [];
+        //     }
+
+        //     agregarProducto(producto) {
+        //         this.productos.push(producto);
+        //         console.log(`${producto.nombre} ha sido agregado al carrito.`);
+        //     }
+
+
+        //     calcularTotal() {
+        //         let total = 0;
+        //         for (let producto of this.productos) {
+        //             total += producto.precio;
+        //         }
+        //         console.log("Total del carrito: " + total);
+        //     }
+        // }
+
+
+
+
+        // let teclado = new Producto("Teclado", 30);
+        // teclado.mostrarInformacion();
+        // let mouse = new Producto("Mouse", 20);
+
+        // let carrito = new Carrito();
+
+        // carrito.agregarProducto(teclado);
+        // carrito.agregarProducto(mouse);
+        // carrito.calcularTotal();
+
+
+        class Animal {
+            constructor(nombre) {
+                this.nombre = nombre;
+            }
+
+            comer() {
+                console.log(this.nombre + " está comiendo.");
+            }
+
+        }
+
+
+        class Perro extends Animal {
+            ladrar() {
+                console.log(this.nombre + " está ladrando.");
+            }
+
+            sonido() {
+                console.log(this.nombre + " está haciendo un sonido de perro.");
+            }
+        }
+
+        
+        class Gato extends Animal {
+            maullar() {
+                console.log(this.nombre + " está maullando.");
+            }
+
+            sonido() {
+                console.log(this.nombre + " está haciendo un sonido de gato.");
+            }
+        }
+
+        class Pato extends Animal {
+            cuack() {
+                console.log(this.nombre + " está haciendo cuack.");
+            }
+
+            sonido() {
+                console.log(this.nombre + " está haciendo un sonido de pato.");
+            }
+        }
+
+
+        let animales = [new Perro("Bella"), new Gato("Luna"), new Pato("Donald")];
+
+        for (let animal of animales) {
+            animal.sonido()
+            animal.comer()
+        }
+
+    </script>
+</body>
+</html>
