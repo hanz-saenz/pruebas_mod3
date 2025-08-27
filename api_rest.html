@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API REST</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background: #f8f9fa;
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+    <div>
+        <h1>API REST</h1>
+        <input type="text" placeholder="Ingresar la URL del API" id="APIurl" />
+        <button id="cargarDatosBtn">Cargar datos</button>
+
+        <ul id="datosAPI">
+            <!-- aqui se cargaran los datos -->
+        </ul>
+
+            <form id="nuevoProducto">
+              <!-- Proveedor -->
+              <label>Nombre Proveedor:</label>
+              <select id="proveedorSelect" name="proveedor_id" required>
+                  <option value="">Selecciona un proveedor</option>
+                </select>
+              <!-- Categorías (puedes agregar más con JS) -->
+              <fieldset>
+                <select id="categoriaSelect" name="categoria_id" required>
+                  <option value="">Selecciona una categoría</option>
+                </select>
+              </fieldset>
+              
+              <!-- Marca -->
+              <label>ID Marca:</label>
+              <select id="marcaSelect" name="marca_id" required>
+                  <option value="">Selecciona una marca</option>
+                </select>
+              
+              <!-- Otros campos -->
+              <label>Nombre:</label>
+              <input type="text" name="nombre" required value="dddddddddd">
+              <label>Nombre ES:</label>
+              <input type="text" name="nombre_es" value="dddddddddd">
+              <label>Nombre EN:</label>
+              <input type="text" name="nombre_en" value="dddddddddd">
+              <label>Nombre FR:</label>
+              <input type="text" name="nombre_fr" value="dddddddddd">
+              <label>Descripción:</label>
+              <input type="text" name="descripcion" required value="dddddddddd">
+              <label>Descripción ES:</label>
+              <input type="text" name="descripcion_es" value="dddddddddd">
+              <label>Descripción EN:</label>
+              <input type="text" name="descripcion_en" value="dddddddddd">
+              <label>Descripción FR:</label>
+              <input type="text" name="descripcion_fr" value="dddddddddd">
+              <label>Precio:</label>
+              <input type="number" step="0.01" name="precio" required value="5">
+              <label>Stock:</label>
+              <input type="number" name="stock" required value="10">
+              <label>Activo:</label>
+              <input type="checkbox" name="activo" checked>
+
+              <button id="agregarProductoBtn" type="submit">Agregar producto</button>
+              <button id="actualizarProductoBtn" type="submit">Actualizar producto</button>
+              <button id="eliminarProductoBtn" type="button">Eliminar producto</button>
+            </form>
+    </div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            consultarCategorias();
+            consultarMarcas();
+            consultarProveedores();
+        });
+
+        let urlAPI = document.getElementById('APIurl').value.trim();
+        console.log(urlAPI);
+        document.getElementById('cargarDatosBtn').onclick = () => {
+                fetch(urlAPI)
+                .then(respuesta => respuesta.json())
+                .then(datos => mostrarDatos(datos))
+                .catch(error => console.error('Error al cargar los datos:', error));
+        }
+
+        document.getElementById('nuevoProducto').onsubmit = (event) => {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+            crearProducto();
+        };
+        document.getElementById('actualizarProductoBtn').onsubmit = (event) => {
+            event.preventDefault(); // Evita el envío del formulario por defecto
+            actualizarProducto(20);
+        };
+
+        document.getElementById('eliminarProductoBtn').onclick = () => {
+            eliminarProducto(21);
+        };
+
+        function mostrarDatos(datos) {
+            
+            let lista = document.getElementById('datosAPI');
+            lista.innerHTML = "";
+            datos.data.forEach(dato => {
+                let item = document.createElement('li');
+                item.textContent = `${dato.nombre} - ${dato.marca.nombre}`;
+                lista.appendChild(item);
+            });
+        }
+
+        function consultarCategorias () {
+            fetch('http://localhost:8000/es/productos/api/categorias')
+            .then(respuesta => respuesta.json())
+            .then(datos => mostrarCategorias(datos))
+            .catch(error => console.error('Error al cargar las categorías:', error));
+        }
+
+        function mostrarCategorias(datos) {
+            let selectCategorias = document.getElementById('categoriaSelect');
+            datos.forEach(categoria => {
+                let option = document.createElement('option');
+                option.value = categoria.id;
+                option.textContent = categoria.nombre;
+                selectCategorias.appendChild(option);
+            });
+        }
+
+        function consultarMarcas() {
+            fetch('http://localhost:8000/es/productos/api/productos/marcas')
+            .then(respuesta => respuesta.json())
+            .then(datos => mostrarMarcas(datos))
+            .catch(error => console.error('Error al cargar las marcas:', error));
+        }
+
+        function mostrarMarcas(datos) {
+            let selectMarcas = document.getElementById('marcaSelect');
+            datos.data.forEach(marca => {
+                let option = document.createElement('option');
+                option.value = marca.id;
+                option.textContent = marca.nombre;
+                selectMarcas.appendChild(option);
+            });
+        }
+
+        function consultarProveedores() {
+            fetch('http://localhost:8000/es/productos/api/productos/proveedores')
+            .then(respuesta => respuesta.json())
+            .then(datos => mostrarProveedores(datos))
+            .catch(error => console.error('Error al cargar los proveedores:', error));
+        }
+
+        function mostrarProveedores(datos) {
+            let selectProveedores = document.getElementById('proveedorSelect');
+            datos.data.forEach(proveedor => {
+                let option = document.createElement('option');
+                option.value = proveedor.id;
+                option.textContent = proveedor.nombre;
+                selectProveedores.appendChild(option);
+            });
+        }
+
+
+
+        // {
+        //     "proveedor": {
+        //         "id": 5,
+        //         "nombre": "TecnoCore"
+        //     },
+        //     "categorias": [
+
+    
+        //     ],
+        //     "marca": {
+        //         "id": 2,
+        //         "nombre": "Samsung"
+        //     },
+        //     "imagenes": [
+        //         {
+        //             "id": 1,
+        //             "imagen": "/media/imagenes/56a38571dde36168af1b9ba61d441b89.webp",
+        //             "producto": 1,
+        //             "es_principal": true
+        //         },
+        //         {
+        //             "id": 2,
+        //             "imagen": "/media/imagenes/60a1a0602a48eb6cc41f75df.jpg",
+        //             "producto": 1,
+        //             "es_principal": false
+        //         }
+
+        //     ],
+        //     "nombre": "Tecladossssssssss usado",
+        //     "nombre_es": "Teclado usado",
+        //     "nombre_en": "usado keyboard",
+        //     "nombre_fr": "usado clavier",
+        //     "descripcion": "Teclado usado",
+        //     "descripcion_es": "Teclado usado",
+        //     "descripcion_en": "usado keyboard",
+        //     "descripcion_fr": "usado clavier",
+        //     "precio": "15000.00",
+        //     "stock": 3,
+        //     "fecha_creacion": "2025-06-10",
+        //     "fecha_actualizacion": "2025-07-08",
+        //     "activo": true
+        // }
+
+
+
+        function crearProducto() {
+            let proveedor = document.getElementById('proveedorSelect').value;
+            let categoria = document.getElementById('categoriaSelect').value;
+            let marca = document.getElementById('marcaSelect').value;
+            
+            let precio = document.getElementsByName('precio')[0].value;
+            let stock = document.getElementsByName('stock')[0].value;
+            let activo = document.getElementsByName('activo')[0].checked;
+            let nombre = document.getElementsByName('nombre')[0].value;
+            let nombre_es = document.getElementsByName('nombre_es')[0].value;
+            let nombre_en = document.getElementsByName('nombre_en')[0].value;
+            let nombre_fr = document.getElementsByName('nombre_fr')[0].value;
+            let descripcion = document.getElementsByName('descripcion')[0].value;
+            let descripcion_es = document.getElementsByName('descripcion_es')[0].value;
+            let descripcion_en = document.getElementsByName('descripcion_en')[0].value;
+            let descripcion_fr = document.getElementsByName('descripcion_fr')[0].value;
+
+            let producto = {
+                "proveedor": {
+                        "id": 5,
+                        "nombre": "TecnoCore"
+                    },
+                "categorias": [
+
+                    {
+                        "id": 3,
+                        "nombre": "Ferretería"
+                    },
+                    {
+                        "id": 4,
+                        "nombre": "Alcoba"
+                    }
+                ],
+                "marca": {
+                        "id": 2,
+                        "nombre": "Samsung"
+                    },
+                "precio": precio,
+                "stock": stock,
+                "activo": activo,
+                "nombre": nombre,
+                "nombre_es": nombre_es,
+                "nombre_en": nombre_en,
+                "nombre_fr": nombre_fr,
+                "descripcion": descripcion,
+                'descripcion_es':descripcion_es,
+                'descripcion_en':descripcion_en,
+                'descripcion_fr':descripcion_fr
+            };
+
+            console.log(producto);
+
+            fetch('http://localhost:8000/es/productos/api/productos/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(producto)
+            })
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+                console.log('Producto creado:', datos);
+                // Aquí puedes agregar lógica para actualizar la interfaz de usuario
+            })
+            .catch(error => console.error('Error al crear el producto:', error));
+        }
+
+        function actualizarProducto(id) {
+            let proveedor = document.getElementById('proveedorSelect').value;
+            let categoria = document.getElementById('categoriaSelect').value;
+            let marca = document.getElementById('marcaSelect').value;
+
+            let precio = document.getElementsByName('precio')[0].value;
+            let stock = document.getElementsByName('stock')[0].value;
+            let activo = document.getElementsByName('activo')[0].checked;
+            let nombre = document.getElementsByName('nombre')[0].value;
+            let nombre_es = document.getElementsByName('nombre_es')[0].value;
+            let nombre_en = document.getElementsByName('nombre_en')[0].value;
+            let nombre_fr = document.getElementsByName('nombre_fr')[0].value;
+            let descripcion = document.getElementsByName('descripcion')[0].value;
+            let descripcion_es = document.getElementsByName('descripcion_es')[0].value;
+            let descripcion_en = document.getElementsByName('descripcion_en')[0].value;
+            let descripcion_fr = document.getElementsByName('descripcion_fr')[0].value;
+
+            let producto = {
+                "proveedor": {
+                    "id": proveedor,
+                    "nombre": "TecnoCore"
+                },
+                "categorias": [
+                    {
+                        "id": categoria,
+                        "nombre": "Ferretería"
+                    },
+                    {
+                        "id": 4,
+                        "nombre": "Alcoba"
+                    }
+                ],
+                "marca": {
+                    "id": marca,
+                    "nombre": "Samsung"
+                },
+                "precio": precio,
+                "stock": stock,
+                "activo": activo,
+                "nombre": nombre,
+                "nombre_es": nombre_es,
+                "nombre_en": nombre_en,
+                "nombre_fr": nombre_fr,
+                "descripcion": descripcion,
+                'descripcion_es': descripcion_es,
+                'descripcion_en': descripcion_en,
+                'descripcion_fr': descripcion_fr
+            };
+
+            console.log(producto);
+
+            fetch(`http://localhost:8000/es/productos/api/productos/${id}/`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(producto)
+            })
+            .then(respuesta => respuesta.json())
+            .then(datos => {
+                console.log('Producto actualizado:', datos);
+                // Aquí puedes agregar lógica para actualizar la interfaz de usuario
+            })
+            .catch(error => console.error('Error al actualizar el producto:', error));
+        }
+
+        function eliminarProducto(id) {
+            fetch(`http://localhost:8000/es/productos/api/productos/${id}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(respuesta => {
+                if (respuesta.ok) {
+                    console.log('Producto eliminado correctamente');
+                    // Aquí puedes agregar lógica para actualizar la interfaz de usuario
+                } else {
+                    console.error('Error al eliminar el producto: respuesta no OK');
+                }
+            })
+            .catch(error => console.error('Error al eliminar el producto:', error));
+        }
+    </script>
+</body>
+</html>
